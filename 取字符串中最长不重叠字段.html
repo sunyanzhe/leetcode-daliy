@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>获取字符串最长不重复字段</title>
+</head>
+<body>
+    <script>
+        function getStr(str) {
+            let start = 0,
+                subLen = 0,
+                subStart = 0,
+                hash = {};
+            for (let i = 0, len = str.length; i < len; i++) {
+                let char = str.charAt(i);
+                if (!hash[char]) {
+                    hash[char] = true;
+                } else {
+                    while (true) {
+                        if (str[start] === char) {
+                            start++;
+                            break;
+                        }
+                        hash[str[start]] = false;
+                        start++
+                    }
+                }
+                if (subLen < i - start + 1) {
+                    sunStart = start;
+                    subLen = i - start + 1;
+                }
+            }
+            let subStr = str.substr(sunStart, subLen);
+            return [subLen, subStr];
+        }   
+        console.log(getStr('bbbbb'));
+        console.log(getStr('abcdabcabcabcdef'));
+        console.log(getStr('asdasdasdqweeqwe'));
+
+    </script>
+</body>
+</html>
