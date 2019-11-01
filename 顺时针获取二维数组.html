@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>顺时针获取二维数组</title>
+</head>
+<body>
+    <pre>
+        [
+            [1,2,3],
+            [4,5,6],
+            [7,8,9]
+        ]
+
+        显示为[1,2,3,6,9,8,7,4,5]
+
+        [
+            [1, 2, 3, 4 ],
+            [5, 6, 7, 8 ],
+            [9, 10,11,12],
+            [13,14,15,16],
+        ]
+        显示为[1,2,3,4,8,12,16,15,14,13,9,5,6,7,11,10]
+    </pre>
+    <script>
+        let arr = [
+            [1,2,3],
+            [4,5,6],
+            [7,8,9]
+        ],
+            arr2 = [
+            [1,2,3,4],
+            [5,6,7,8],
+            [9,10,11,12],
+            [13,14,15,16]
+        ];
+        function shunshizhenDisplay(arr) {
+            let xDir = [0, 1, 0, -1],       //x轴方向
+                yDir = [1, 0, -1, 0],       //y轴方向                             
+                DIR = 0,                    //控制x y的方向     0是向右   1是向下   2是向左     3是向上   
+                x = 0, y = -1,
+                height = arr.length,
+                width = height ? arr[0].length : 0,
+                size = height * width,
+                result = [];
+            for (let step = 0, total = 0; total < size; total += step) {
+                if (DIR == 0 || DIR == 2) {
+                    step = width;
+                    height--;
+                } else {
+                    step = height;
+                    width--;
+                }
+                for (let i = 0; i < step; i++) {
+                    x += xDir[DIR];
+                    y += yDir[DIR];
+                    result.push(arr[x][y]);
+                }
+                DIR = ++DIR % 4;
+            }
+            return result
+        }
+        let res1 = shunshizhenDisplay(arr),
+            res2 = shunshizhenDisplay(arr2);
+        console.log(res1);
+        console.log(res2);
+    </script>
+</body>
+</html>
