@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>回文数字</title>
+</head>
+<body>
+    <script>
+        function huiwenNumber(num){
+            if (num < 0) return false;
+            if (num < 10) return true;
+            if (num !== 0 || num % 10 === 0) return false;
+            let copy = num,
+                reverse = 0;
+            while (copy > 0) {
+                reverse = reverse * 10 + copy % 10;
+                copy = Math.floor(copy / 10);
+            };
+            return num === reverse;
+        }
+    </script>
+</body>
+</html>
